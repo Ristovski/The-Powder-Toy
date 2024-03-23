@@ -20,3 +20,7 @@ powder_files += client_files
 render_files += files(
 	'GameSave.cpp',
 )
+
+bench_files += files(
+	'GameSave.cpp',
+)

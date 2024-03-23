@@ -14,4 +14,5 @@ font_graphics_files = files(
 
 powder_files += graphics_files + powder_graphics_files
 render_files += graphics_files + powder_graphics_files
+bench_files += graphics_files + powder_graphics_files
 font_files += graphics_files + font_graphics_files

@@ -18,6 +18,11 @@ if get_option('prepare')
 	subdir_done()
 endif
 
+tracy_dep = subproject('tracy').get_variable('tracy_dep')
+if get_option('enable_tracy')
+	add_project_arguments('-DTRACY_ENABLE', language: 'cpp')
+endif
+
 fs = import('fs')
 to_array = generator(
 	executable('toarray', sources: 'resources/ToArray.cpp', native: true),
@@ -370,6 +375,7 @@ subdir('resources')
 powder_files += data_files
 render_files += data_files
 font_files += data_files
+bench_files += data_files
 
 if host_platform == 'emscripten'
 	project_link_args += [
@@ -380,6 +386,7 @@ endif
 if get_option('build_powder')
 	powder_deps += project_deps + [
 		threads_dep,
+		tracy_dep,
 		zlib_dep,
 		png_dep,
 		sdl2_dep,
@@ -422,6 +429,7 @@ if get_option('build_render')
 	endif
 	render_deps = project_deps + [
 		threads_dep,
+		tracy_dep,
 		zlib_dep,
 		bzip2_dep,
 		json_dep,
@@ -443,12 +451,41 @@ if get_option('build_render')
 	)
 endif
 
+if get_option('build_bench')
+	xxhash_dep = subproject('xxhash').get_variable('xxhash_dep')
+	bench_deps = project_deps + [
+		tracy_dep,
+		xxhash_dep,
+		threads_dep,
+		zlib_dep,
+		bzip2_dep,
+		json_dep,
+		png_dep,
+		fftw_dep,
+	]
+	bench_link_args = project_link_args
+	if host_platform == 'linux' and is_static
+		bench_link_args += [ '-static' ]
+	endif
+	executable(
+		'bench',
+		sources: bench_files,
+		include_directories: project_inc,
+		c_args: project_c_args,
+		cpp_args: project_cpp_args,
+		link_args: bench_link_args,
+		dependencies: bench_deps,
+		export_dynamic: project_export_dynamic,
+	)
+endif
+
 if get_option('build_font')
 	if host_platform == 'emscripten'
 		error('font does not target emscripten')
 	endif
 	font_deps = project_deps + [
 		threads_dep,
+		tracy_dep,
 		zlib_dep,
 		png_dep,
 		sdl2_dep,

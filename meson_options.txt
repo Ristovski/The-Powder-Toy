@@ -112,6 +112,18 @@ option(
 	description: 'Build the thumbnail renderer'
 )
 option(
+	'build_bench',
+	type: 'boolean',
+	value: false,
+	description: 'Build the benchmark'
+)
+option(
+	'enable_tracy',
+	type: 'boolean',
+	value: false,
+	description: 'Enables the Tracy profiler client'
+)
+option(
 	'build_font',
 	type: 'boolean',
 	value: false,

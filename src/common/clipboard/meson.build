@@ -36,4 +36,5 @@ else
 	powder_files += files('Null.cpp')
 endif
 render_files += files('Null.cpp')
+bench_files += files('Null.cpp')
 font_files += files('Null.cpp')

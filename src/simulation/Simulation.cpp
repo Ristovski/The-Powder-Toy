@@ -16,6 +16,8 @@
 #include <iostream>
 #include <set>
 
+#include "tracy/Tracy.hpp"
+
 static float remainder_p(float x, float y)
 {
 	return std::fmod(x, y) + (x>=0 ? 0 : y);
@@ -2200,6 +2202,7 @@ Simulation::PlanMoveResult Simulation::PlanMove<false, const Simulation>(const S
 
 void Simulation::UpdateParticles(int start, int end)
 {
+	ZoneScoped;
 	//the main particle loop function, goes over all particles.
 	auto &sd = SimulationData::CRef();
 	auto &elements = sd.elements;

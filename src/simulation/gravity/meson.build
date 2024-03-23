@@ -11,3 +11,4 @@ else
 endif
 powder_files += files('Fft.cpp')
 render_files += files('Null.cpp')
+bench_files += files('Fft.cpp')

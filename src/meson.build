@@ -106,6 +106,10 @@ render_files = files(
 	'PowderToyRenderer.cpp',
 )
 
+bench_files = files(
+	'bench.cpp',
+)
+
 font_files = files(
 	'PowderToyFontEditor.cpp',
 	'PowderToySDL.cpp',
@@ -163,6 +167,7 @@ subdir('tasks')
 
 powder_files += common_files
 render_files += common_files
+bench_files += common_files
 font_files += common_files
 
 simulation_elem_defs = []

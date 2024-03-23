@@ -16,6 +16,7 @@ subdir('gravity')
 
 powder_files += simulation_files
 render_files += simulation_files
+bench_files += simulation_files
 
 powder_files += files(
 	'Editing.cpp',
@@ -25,5 +26,9 @@ powder_files += files(
 	'SnapshotDelta.cpp',
 )
 render_files += files(
+	'NoToolClasses.cpp',
+)
+bench_files += files(
+	'Editing.cpp',
 	'NoToolClasses.cpp',
 )

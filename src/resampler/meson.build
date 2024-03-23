@@ -4,4 +4,5 @@ resampler_files = files(
 
 powder_files += resampler_files
 render_files += resampler_files
+bench_files += resampler_files
 font_files += resampler_files
